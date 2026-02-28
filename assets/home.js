@@ -1,5 +1,5 @@
 async function eliminarPelicula(id) {
-  if (!confirm("¿Deseas eliminar esta película?")) {
+  if (!confirm("¿Seguro que deseas eliminar esta película?\nPresiona 'Aceptar' para eliminar o 'Cancelar' para mantenerla.")) {
     return;
   }
 

@@ -39,7 +39,7 @@ $totalPeliculas = $movieController->totalMovies();
                 </h2>
                 <hr>
                 <?php echo "Total de películas: <strong>{$totalPeliculas}</strong>"; ?>
-                <?php include 'pacientes.php'; ?>
+                <?php include 'peliculas.php'; ?>
             </div>
         </div>
     </div>

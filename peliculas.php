@@ -23,6 +23,15 @@
                     <td><?php echo $pelicula['duracion_min']; ?> min</td>
                     <td><?php echo $pelicula['clasificacion']; ?></td>
                     <td>
+                        <a class="btn btn-sm btn-info text-white" href="visualizar.php?id=<?php echo $pelicula['id']; ?>" title="Ver detalle">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a class="btn btn-sm btn-warning" href="?id=<?php echo $pelicula['id']; ?>" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <button class="btn btn-sm btn-danger" onclick="eliminarPelicula(<?php echo $pelicula['id']; ?>)" title="Eliminar">
+                            <i class="bi bi-trash3"></i>
+                        </button>
                     </td>
                 </tr>
             <?php endforeach; ?>

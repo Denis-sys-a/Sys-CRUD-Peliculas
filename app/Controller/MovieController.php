@@ -6,14 +6,26 @@ class MovieController
     {
     }
 
-    public function create(array $input): bool
+    public function create(array $input, array $files = []): bool
     {
-        return $this->repository->create($this->sanitizeInput($input));
+        $data = $this->sanitizeInput($input);
+        $data['cartel_url'] = $this->resolvePosterPath($files['cartel_imagen'] ?? null, '');
+
+        return $this->repository->create($data);
     }
 
-    public function update(int $id, array $input): bool
+    public function update(int $id, array $input, array $files = []): bool
     {
-        return $this->repository->update($id, $this->sanitizeInput($input));
+        $currentMovie = $this->repository->findById($id);
+        if (!$currentMovie) {
+            return false;
+        }
+
+        $data = $this->sanitizeInput($input);
+        $currentPoster = (string) ($currentMovie['cartel_url'] ?? '');
+        $data['cartel_url'] = $this->resolvePosterPath($files['cartel_imagen'] ?? null, $currentPoster);
+
+        return $this->repository->update($id, $data);
     }
 
     public function delete(int $id): bool
@@ -54,6 +66,47 @@ class MovieController
             'clasificacion' => trim($input['clasificacion'] ?? ''),
             'sinopsis' => trim($input['sinopsis'] ?? ''),
         ];
+    }
+
+    private function resolvePosterPath(?array $posterFile, string $currentPoster): string
+    {
+        if (!$posterFile || ($posterFile['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+            return $currentPoster;
+        }
+
+        if (($posterFile['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
+            return $currentPoster;
+        }
+
+        if (!is_uploaded_file($posterFile['tmp_name'] ?? '')) {
+            return $currentPoster;
+        }
+
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mimeType = $finfo->file($posterFile['tmp_name']);
+        $allowedTypes = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/webp' => 'webp',
+        ];
+
+        if (!isset($allowedTypes[$mimeType])) {
+            return $currentPoster;
+        }
+
+        $targetDirectory = dirname(__DIR__, 2) . '/assets/img';
+        if (!is_dir($targetDirectory)) {
+            mkdir($targetDirectory, 0775, true);
+        }
+
+        $fileName = uniqid('cartel_', true) . '.' . $allowedTypes[$mimeType];
+        $targetFilePath = $targetDirectory . '/' . $fileName;
+
+        if (!move_uploaded_file($posterFile['tmp_name'], $targetFilePath)) {
+            return $currentPoster;
+        }
+
+        return 'assets/img/' . $fileName;
     }
 
     private function resolveStrategy(string $format): ExportStrategyInterface

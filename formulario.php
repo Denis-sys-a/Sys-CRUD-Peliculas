@@ -2,7 +2,7 @@
     <a href="./" class="float-end"><i class="bi bi-arrow-clockwise"></i> limpiar</a>
 <?php endif; ?>
 
-<form action="<?php echo isset($peliculaEditar['id']) ? 'acciones/actualizarPelicula.php' : 'acciones/acciones.php'; ?>" method="POST">
+<form action="<?php echo isset($peliculaEditar['id']) ? 'acciones/actualizarPelicula.php' : 'acciones/acciones.php'; ?>" method="POST" enctype="multipart/form-data">
     <?php if (isset($peliculaEditar['id'])): ?>
         <input type="hidden" name="id" value="<?php echo $peliculaEditar['id']; ?>" />
     <?php endif; ?>
@@ -45,7 +45,14 @@
         <label class="form-label">Sinopsis</label>
         <textarea name="sinopsis" class="form-control" rows="3" required><?php echo $peliculaEditar['sinopsis'] ?? ''; ?></textarea>
     </div>
-
+    <div class="mb-3">
+        <label class="form-label">Cartel de la película (opcional)</label>
+        <input type="file" name="cartel_imagen" class="form-control" accept="image/png,image/jpeg,image/webp" />
+        <div class="form-text">Formatos permitidos: JPG, PNG o WEBP.</div>
+        <?php if (!empty($peliculaEditar['cartel_url'])): ?>
+            <div class="mt-2 small text-muted">Imagen actual: <?php echo htmlspecialchars($peliculaEditar['cartel_url'], ENT_QUOTES, 'UTF-8'); ?></div>
+        <?php endif; ?>
+    </div>
     <div class="d-grid gap-2">
         <button type="submit" class="btn btn-primary">
             <?php echo isset($peliculaEditar['id']) ? 'Actualizar película' : 'Guardar película'; ?>

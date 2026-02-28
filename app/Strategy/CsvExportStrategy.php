@@ -8,7 +8,7 @@ class CsvExportStrategy implements ExportStrategyInterface
         header('Content-Disposition: attachment; filename="peliculas_' . date('Y-m-d') . '.csv"');
 
         $output = fopen('php://output', 'w');
-        fputcsv($output, ['ID', 'Título', 'Director', 'Género', 'Año', 'Duración (min)', 'Clasificación', 'Sinopsis']);
+        fputcsv($output, ['ID', 'Título', 'Director', 'Género', 'Año', 'Duración (min)', 'Clasificación', 'Sinopsis', 'Cartel (ruta local)']);
 
         foreach ($movies as $movie) {
             fputcsv($output, [
@@ -20,6 +20,7 @@ class CsvExportStrategy implements ExportStrategyInterface
                 $movie['duracion_min'],
                 $movie['clasificacion'],
                 $movie['sinopsis'],
+                $movie['cartel_url'] ?? '',
             ]);
         }
 

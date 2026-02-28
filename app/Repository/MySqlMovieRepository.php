@@ -8,18 +8,19 @@ class MySqlMovieRepository implements MovieRepositoryInterface
 
     public function create(array $movieData): bool
     {
-        $sql = 'INSERT INTO peliculas (titulo, director, genero, anio_estreno, duracion_min, clasificacion, sinopsis)
-                VALUES (?, ?, ?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO peliculas (titulo, director, genero, anio_estreno, duracion_min, clasificacion, sinopsis, cartel_url)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
         $stmt = $this->connection->prepare($sql);
         $stmt->bind_param(
-            'sssisss',
+            'sssissss',
             $movieData['titulo'],
             $movieData['director'],
             $movieData['genero'],
             $movieData['anio_estreno'],
             $movieData['duracion_min'],
             $movieData['clasificacion'],
-            $movieData['sinopsis']
+            $movieData['sinopsis'],
+            $movieData['cartel_url']
         );
 
         return $stmt->execute();
@@ -28,11 +29,11 @@ class MySqlMovieRepository implements MovieRepositoryInterface
     public function update(int $id, array $movieData): bool
     {
         $sql = 'UPDATE peliculas
-                SET titulo = ?, director = ?, genero = ?, anio_estreno = ?, duracion_min = ?, clasificacion = ?, sinopsis = ?
+                SET titulo = ?, director = ?, genero = ?, anio_estreno = ?, duracion_min = ?, clasificacion = ?, sinopsis = ?, cartel_url = ?
                 WHERE id = ?';
         $stmt = $this->connection->prepare($sql);
         $stmt->bind_param(
-            'sssisssi',
+            'sssissssi',
             $movieData['titulo'],
             $movieData['director'],
             $movieData['genero'],
@@ -40,6 +41,7 @@ class MySqlMovieRepository implements MovieRepositoryInterface
             $movieData['duracion_min'],
             $movieData['clasificacion'],
             $movieData['sinopsis'],
+            $movieData['cartel_url'],
             $id
         );
 

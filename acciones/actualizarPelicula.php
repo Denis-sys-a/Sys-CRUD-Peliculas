@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['id'])) {
     exit;
 }
 
-$ok = $movieController->update((int) $_POST['id'], $_POST);
+$ok = $movieController->update((int) $_POST['id'], $_POST, $_FILES);
 
 if ($ok) {
     header('location:../');

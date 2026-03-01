@@ -21,7 +21,7 @@ Ademas de las tres principales, tambien estan las siguientes:
 ## Estructura
 
 - **ArquitecturaPorCapas(estilo MVC pero simplificado)**:
-- Por la estructura (`Controller`, `Repository`, y endpoints en `acciones/`, y vistas PHP separadas) sigue una **separación de responsabilidades por capas**, cercana a un MVC ligero.
+- Por la estructura (`Controller`, `Repository`, y endpoints en `acciones/`, y vistas PHP separadas) sigue una **separación de responsabilidades por capas**, cercana a un MVC.
 - `app/Controller`:logica de aplicacion.
 - `app/Repository`: acceso a datos.
 - `acciones/`: puntos de entrada HTTP.
@@ -29,12 +29,10 @@ Ademas de las tres principales, tambien estan las siguientes:
 
 ## Base de datos
 
-Importa `bd/bd.sql` para crear `bd_peliculas` con tabla `peliculas`.
+Importar `bd/bd.sql` para crear `bd_peliculas` con tabla `peliculas`.
 
-## Ejecución rápida
+## Ejecucion rápida
 
 ```bash
-php -S 0.0.0.0:8000
+http://localhost/Sys-CRUD-Peliculas/
 ```
-
-Luego abre `http://localhost:8000`.# Sys-CRUD-Peliculas

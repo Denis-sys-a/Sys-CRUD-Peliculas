@@ -15,7 +15,7 @@ class DatabaseSingleton
         );
 
         if ($this->connection->connect_error) {
-            throw new RuntimeException('Error de conexión: ' . $this->connection->connect_error);
+            throw new RuntimeException('Error de conexion: ' . $this->connection->connect_error);
         }
 
         $this->connection->set_charset('utf8mb4');

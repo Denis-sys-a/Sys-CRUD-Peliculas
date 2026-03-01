@@ -2,5 +2,5 @@
 
 interface ExportStrategyInterface
 {
-    public function export(array $movies): void;
+    public function export(array $peliculas): void;
 }

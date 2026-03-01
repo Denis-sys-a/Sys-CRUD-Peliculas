@@ -1,10 +1,10 @@
 <?php
 
-interface MovieRepositoryInterface
+interface PeliculaRepositoryInterface
 {
-    public function create(array $movieData): bool;
+    public function create(array $peliculaData): bool;
 
-    public function update(int $id, array $movieData): bool;
+    public function update(int $id, array $peliculaData): bool;
 
     public function delete(int $id): bool;
 

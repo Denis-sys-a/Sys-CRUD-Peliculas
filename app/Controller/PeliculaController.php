@@ -1,8 +1,8 @@
 <?php
 
-class MovieController
+class PeliculaController
 {
-    public function __construct(private MovieRepositoryInterface $repository)
+    public function __construct(private PeliculaRepositoryInterface $repository)
     {
     }
 
@@ -16,13 +16,13 @@ class MovieController
 
     public function update(int $id, array $input, array $files = []): bool
     {
-        $currentMovie = $this->repository->findById($id);
-        if (!$currentMovie) {
+        $currentPelicula = $this->repository->findById($id);
+        if (!$currentPelicula) {
             return false;
         }
 
         $data = $this->sanitizeInput($input);
-        $currentPoster = (string) ($currentMovie['cartel_url'] ?? '');
+        $currentPoster = (string) ($currentPelicula['cartel_url'] ?? '');
         $data['cartel_url'] = $this->resolvePosterPath($files['cartel_imagen'] ?? null, $currentPoster);
 
         return $this->repository->update($id, $data);
@@ -43,16 +43,16 @@ class MovieController
         return $this->repository->findAll();
     }
 
-    public function totalMovies(): int
+    public function totalPeliculas(): int
     {
         return $this->repository->countAll();
     }
 
     public function export(string $format): void
     {
-        $movies = $this->repository->findAll();
+        $peliculas = $this->repository->findAll();
         $strategy = $this->resolveStrategy($format);
-        $strategy->export($movies);
+        $strategy->export($peliculas);
     }
 
     private function sanitizeInput(array $input): array

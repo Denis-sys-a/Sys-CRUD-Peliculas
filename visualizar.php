@@ -6,7 +6,7 @@ if (!isset($_GET['id'])) {
     exit;
 }
 
-$pelicula = $movieController->getOne((int) $_GET['id']);
+$pelicula = $peliculaController->getOne((int) $_GET['id']);
 if (!$pelicula) {
     header('location:./');
     exit;

@@ -13,7 +13,7 @@ if ($id <= 0) {
     exit;
 }
 
-$ok = $movieController->delete($id);
+$ok = $peliculaController->delete($id);
 
 echo json_encode([
     'success' => $ok,

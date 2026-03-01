@@ -3,11 +3,11 @@ require_once __DIR__ . '/bootstrap.php';
 
 $peliculaEditar = null;
 if (isset($_GET['id'])) {
-    $peliculaEditar = $movieController->getOne((int) $_GET['id']);
+    $peliculaEditar = $peliculaController->getOne((int) $_GET['id']);
 }
 
-$peliculas = $movieController->getAll();
-$totalPeliculas = $movieController->totalMovies();
+$peliculas = $peliculaController->getAll();
+$totalPeliculas = $peliculaController->totalPeliculas();
 ?>
 <!doctype html>
 <html lang="es">
@@ -15,7 +15,7 @@ $totalPeliculas = $movieController->totalMovies();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CRUD de Películas</title>
+    <title>CRUD de Peliculas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="assets/css/home.css">

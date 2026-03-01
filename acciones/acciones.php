@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$ok = $movieController->create($_POST, $_FILES);
+$ok = $peliculaController->create($_POST, $_FILES);
 if ($ok) {
     header('location:../');
     exit;

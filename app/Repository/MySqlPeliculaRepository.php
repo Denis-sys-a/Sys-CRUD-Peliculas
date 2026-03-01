@@ -1,32 +1,32 @@
 <?php
 
-class MySqlMovieRepository implements MovieRepositoryInterface
+class MySqlPeliculaRepository implements PeliculaRepositoryInterface
 {
     public function __construct(private mysqli $connection)
     {
     }
 
-    public function create(array $movieData): bool
+    public function create(array $peliculaData): bool
     {
         $sql = 'INSERT INTO peliculas (titulo, director, genero, anio_estreno, duracion_min, clasificacion, sinopsis, cartel_url)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
         $stmt = $this->connection->prepare($sql);
         $stmt->bind_param(
             'sssissss',
-            $movieData['titulo'],
-            $movieData['director'],
-            $movieData['genero'],
-            $movieData['anio_estreno'],
-            $movieData['duracion_min'],
-            $movieData['clasificacion'],
-            $movieData['sinopsis'],
-            $movieData['cartel_url']
+            $peliculaData['titulo'],
+            $peliculaData['director'],
+            $peliculaData['genero'],
+            $peliculaData['anio_estreno'],
+            $peliculaData['duracion_min'],
+            $peliculaData['clasificacion'],
+            $peliculaData['sinopsis'],
+            $peliculaData['cartel_url']
         );
 
         return $stmt->execute();
     }
 
-    public function update(int $id, array $movieData): bool
+    public function update(int $id, array $peliculaData): bool
     {
         $sql = 'UPDATE peliculas
                 SET titulo = ?, director = ?, genero = ?, anio_estreno = ?, duracion_min = ?, clasificacion = ?, sinopsis = ?, cartel_url = ?
@@ -34,14 +34,14 @@ class MySqlMovieRepository implements MovieRepositoryInterface
         $stmt = $this->connection->prepare($sql);
         $stmt->bind_param(
             'sssissssi',
-            $movieData['titulo'],
-            $movieData['director'],
-            $movieData['genero'],
-            $movieData['anio_estreno'],
-            $movieData['duracion_min'],
-            $movieData['clasificacion'],
-            $movieData['sinopsis'],
-            $movieData['cartel_url'],
+            $peliculaData['titulo'],
+            $peliculaData['director'],
+            $peliculaData['genero'],
+            $peliculaData['anio_estreno'],
+            $peliculaData['duracion_min'],
+            $peliculaData['clasificacion'],
+            $peliculaData['sinopsis'],
+            $peliculaData['cartel_url'],
             $id
         );
 

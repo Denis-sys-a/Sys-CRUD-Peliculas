@@ -36,15 +36,16 @@ if ($cartelGuardado !== '') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detalle de película</title>
+    <title>Detalles de esta película</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/home.css">
 </head>
 
 <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Detalle de la película</h1>
-        <div class="card shadow-sm">
-            <div class="card-body">
+        <h1 class="text-center mb-4 main-title">Detalle de la película</h1>
+        <div class="app-shell detail-shell">
+            <div>
                 <a href="./" class="btn btn-outline-secondary mb-3">← Volver</a>
                 <div class="row g-3 align-items-start">
                     <div class="col-md-8">
@@ -68,7 +69,7 @@ if ($cartelGuardado !== '') {
                             <div class="border rounded p-4 text-muted bg-light">
                                 Sin cartel disponible
                                 <?php if ($cartelGuardado !== ''): ?>
-                                    <div class="small mt-2">No se encontró la imagen guardada.</div>
+                                    <div class="small mt-2">No se encontro la imagen guardada.</div>
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>

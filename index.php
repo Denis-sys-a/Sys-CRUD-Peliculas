@@ -25,13 +25,13 @@ $totalPeliculas = $movieController->totalMovies();
 <body>
     <h1 class="text-center mt-5 mb-4 fw-bold">Sistema CRUD de Peliculas</h1>
 
-    <div class="container">
+    <div class="container app-shell">
         <div class="row justify-content-md-center">
-            <div class="col-md-4" style="border-right: 1px solid #dee2e6;">
+            <div class="col-md-4 form-column">
                 <?php include 'formulario.php'; ?>
             </div>
             <div class="col-md-8">
-                <h2 class="text-center">Catálogo de películas
+                <h2 class="text-center">Catalogo de peliculas geniales
                     <span class="float-end d-flex gap-2">
                         <a href="acciones/exportar.php?format=csv" class="btn btn-success" title="Exportar CSV"><i class="bi bi-filetype-csv"></i></a>
                         <a href="acciones/exportar.php?format=json" class="btn btn-dark" title="Exportar JSON"><i class="bi bi-filetype-json"></i></a>

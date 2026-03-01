@@ -1,0 +1,92 @@
+:root {
+  --bg-overlay: rgba(255, 3, 3, 0.341);
+  --panel-bg: rgb(255, 255, 255);
+  --panel-border: rgb(251, 251, 251);
+  --text-main: #010024;
+  --text-soft: #000000;
+  --accent: #0044ff;
+  --accent-2: #025444;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text-main);
+  background-image:
+    linear-gradient(145deg, rgba(0, 0, 0, 0.712), var(--bg-overlay)),
+    url('https://images.wallpaperscraft.ru/image/single/linii_blesk_krasnyj_129722_1600x900.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.main-title {
+  letter-spacing: 1px;
+  text-shadow: 0 0 16px rgb(255, 2, 2);
+}
+
+.app-shell {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  box-shadow: 0 15px 45px rgba(255, 1, 1, 0.952);
+  backdrop-filter: blur(4px);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.form-column {
+  border-right: 1px solid var(--panel-border) !important;
+}
+
+.form-label,
+.form-text,
+.table,
+h2,
+label,
+li,
+p,
+strong {
+  color: var(--text-main);
+}
+
+.form-control,
+.form-select,
+textarea {
+  background-color: rgba(220, 0, 0, 0.92);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #a81616, #3704efbf);
+  border: 0;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #dc0000, #3f1a1a);
+}
+
+.table thead th {
+  color: var(--accent-2);
+  border-bottom-color: rgb(8, 255, 206);
+}
+
+.table tbody td {
+  color: var(--text-soft);
+  border-bottom-color: rgb(13, 0, 255);
+}
+
+.dataTables_info,
+.dataTables_paginate,
+.dataTables_length,
+.dataTables_filter label {
+  color: var(--text-soft) !important;
+}
+
+@media (max-width: 768px) {
+  .form-column {
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--panel-border) !important;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+}

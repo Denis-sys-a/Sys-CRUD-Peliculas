@@ -1,3 +1,4 @@
+---Para crear la base de datos bd_peliculas y la tabla peliculas, solo es necesario ejecutar el siguiente script SQL en phpMyAdmin:
 CREATE DATABASE IF NOT EXISTS `bd_peliculas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `bd_peliculas`;
 

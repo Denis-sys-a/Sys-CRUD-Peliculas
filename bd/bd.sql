@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `peliculas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--Ya con la tabla creada, se insertan los datos de las peliculas en la tabla con el siguiente script SQL:
 ALTER TABLE `peliculas`
   ADD COLUMN IF NOT EXISTS `cartel_url` varchar(255) DEFAULT NULL AFTER `sinopsis`;
 

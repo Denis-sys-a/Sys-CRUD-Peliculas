@@ -27,9 +27,11 @@ Ademas de las tres principales, tambien estan las siguientes:
 - `acciones/`: puntos de entrada HTTP.
 - `index.php`: `formulario.php`, `peliculas.php`, `visualizar.php`: presentación.
 
-## Base de datos
+## Base de datos (MySQL Workbench)
 
-Importar `bd/bd.sql` para crear `bd_peliculas` con tabla `peliculas`.
+1. Abrir **MySQL Workbench** y conéctarse a tu servidor local.
+2. Abrir una nueva pestaña SQL y ejecuta el script `bd/bd.sql`.
+3. El script crea la base de datos `bd_peliculas`, la tabla `peliculas` y carga datos iniciales.
 
 ## Ejecucion rápida
 

@@ -29,33 +29,35 @@ class DatabaseSingleton
     {
         $host = (string) ($config['host'] ?? 'localhost');
         $user = (string) ($config['user'] ?? 'root');
-        $password = (string) ($config['password'] ?? '');
         $database = (string) ($config['database'] ?? 'bd_peliculas');
         $port = (int) ($config['port'] ?? 3306);
 
-        try {
-            return new mysqli($host, $user, $password, $database, $port);
-        } catch (mysqli_sql_exception $e) {
-            $fallbackPassword = (string) ($config['fallback_password'] ?? '');
+        $primaryPassword = (string) ($config['password'] ?? '');
+        $fallbackPassword = (string) ($config['fallback_password'] ?? '');
 
-            if ($password === '' && $fallbackPassword !== '') {
-                try {
-                    return new mysqli($host, $user, $fallbackPassword, $database, $port);
-                } catch (mysqli_sql_exception $fallbackException) {
-                    throw new RuntimeException(
-                        'No se pudo conectar a MySQL con las credenciales configuradas. '
-                        . 'Verifica config/config.php o crea config/config.local.php.',
-                        0,
-                        $fallbackException
-                    );
-                }
+        $passwordAttempts = array_values(array_unique([$primaryPassword, $fallbackPassword, 'root', '']));
+
+        $driver = new mysqli_driver();
+        $previousReportMode = $driver->report_mode;
+        $driver->report_mode = MYSQLI_REPORT_OFF;
+
+        $lastError = '';
+
+        foreach ($passwordAttempts as $attemptPassword) {
+            $connection = @new mysqli($host, $user, $attemptPassword, $database, $port);
+
+            if ($connection->connect_errno === 0) {
+                $driver->report_mode = $previousReportMode;
+
+                return $connection;
             }
 
-            throw new RuntimeException(
-                'No se pudo conectar a MySQL. Verifica config/config.php o config/config.local.php.',
-                0,
-                $e
-            };
+            $lastError = $connection->connect_error;
+            $connection->close();
         }
+
+        $driver->report_mode = $previousReportMode;
+
+        throw new RuntimeException('No se pudo conectar a MySQL. Verifica config/config.local.php. Error original: ' . $lastError);
     }
 }

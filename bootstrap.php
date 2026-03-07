@@ -17,6 +17,14 @@ if (file_exists($localConfigPath)) {
     }
 }
 
-$database = DatabaseSingleton::getInstance($config);
-$repository = new MySqlPeliculaRepository($database->getConnection());
-$peliculaController = new PeliculaController($repository);
+try {
+    $database = DatabaseSingleton::getInstance($config);
+    $repository = new MySqlPeliculaRepository($database->getConnection());
+    $peliculaController = new PeliculaController($repository);
+} catch (RuntimeException $exception) {
+    http_response_code(500);
+    echo '<h2>Error de conexión a MySQL</h2>';
+    echo '<p>' . htmlspecialchars($exception->getMessage(), ENT_QUOTES, 'UTF-8') . '</p>';
+    echo '<p>Solución rápida: copia <code>config/config.local.example.php</code> como <code>config/config.local.php</code> y coloca tu contraseña real.</p>';
+    exit;
+}
